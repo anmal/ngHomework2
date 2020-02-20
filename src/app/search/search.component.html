@@ -1,0 +1,7 @@
+
+<mat-form-field class="filter">
+  <input matInput placeholder="Введите строку для поиска по репозиториям" #input>
+</mat-form-field>
+<br>
+
+{{this.results$ | async | json}}
