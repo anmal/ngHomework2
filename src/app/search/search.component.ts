@@ -1,8 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
+import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {GitSearchService} from '../services/git-search.service';
 import {fromEvent, Observable} from 'rxjs';
-import {IShortRepoInfo} from '../model/IShortRepoInfo';
+import {ISearchRepoResult} from '../model/ISearchRepoResult';
 
 @Component({
   selector: 'app-search',
@@ -11,20 +16,25 @@ import {IShortRepoInfo} from '../model/IShortRepoInfo';
 })
 export class SearchComponent implements AfterViewInit {
 
-  public results$: Observable<IShortRepoInfo>;
-  @ViewChild('input') input: ElementRef;
+  public results$: Observable<ISearchRepoResult>;
+  @ViewChild('searchInput') searchInput: ElementRef;
 
-  constructor(private searchService: GitSearchService) { }
+
+  constructor(public searchService: GitSearchService) {}
+
 
   ngAfterViewInit(): void {
-    fromEvent(this.input.nativeElement, 'keyup')
+
+    fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-        debounceTime(150),
+        debounceTime(300),
         distinctUntilChanged(),
         tap(() => {
-          this.results$ = this.searchService.search(this.input.nativeElement.value);
+          this.results$ = this.searchService.search(this.searchInput.nativeElement.value);
         })
       )
       .subscribe();
   }
+
 }
+

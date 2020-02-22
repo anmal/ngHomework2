@@ -1,0 +1,5 @@
+<div class="shortInfo">
+  <b>Репозиторий: {{repoInfo?.name}} </b><br>
+  <span *ngIf="repoInfo?.description">описание: {{repoInfo.description}}</span><br>
+  ссылка: <a [href]="repoInfo?.html_url">{{repoInfo?.html_url}};</a>
+</div>

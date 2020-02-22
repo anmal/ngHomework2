@@ -9,20 +9,26 @@ import {BaseInterceptor} from './services/base.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import { ShortRepoInfoComponent } from './search/search-result/short-repo-info/short-repo-info.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SearchResultComponent } from './search/search-result/search-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    ShortRepoInfoComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

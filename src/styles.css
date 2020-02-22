@@ -1,9 +1,4 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.filter {
-  margin-top: 100px;
-  margin-left: 100px;
-  min-width: 480px;
-}
 

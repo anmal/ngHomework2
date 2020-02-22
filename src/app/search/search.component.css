@@ -1,0 +1,22 @@
+
+.search {
+  margin-left: 50px;
+}
+
+
+.filter {
+  margin-top: 100px;
+  margin-left: 50px;
+  min-width: 480px;
+}
+
+
+.spinner mat-spinner {
+  margin: 100px auto 0 auto;
+}
+
+.error {
+  margin-top: 20px;
+  color: red!important;
+}
+

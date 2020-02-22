@@ -1,7 +1,22 @@
 
-<mat-form-field class="filter">
-  <input matInput placeholder="Введите строку для поиска по репозиториям" #input>
-</mat-form-field>
-<br>
+<div class="search">
+  <mat-form-field class="filter">
+    <input matInput placeholder="Введите строку для поиска по репозиториям" #searchInput>
+  </mat-form-field>
 
-{{this.results$ | async | json}}
+  <br>
+
+  <div class="error" *ngIf="this.searchService.lastError$ | async as msg">
+    <p>
+      <b>Не удалось выполнить запрос:</b><br>
+      {{msg}}
+    </p>
+  </div>
+
+  <app-search-result *ngIf="results$ | async as searchRes" [searchResult]="searchRes"></app-search-result>
+
+  <div class="spinner" *ngIf="this.searchService.isSearching$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>
