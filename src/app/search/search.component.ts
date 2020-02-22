@@ -1,13 +1,12 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
-  ViewChild
 } from '@angular/core';
-import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {GitSearchService} from '../services/git-search.service';
-import {fromEvent, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ISearchRepoResult} from '../model/ISearchRepoResult';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -17,7 +16,7 @@ import {ISearchRepoResult} from '../model/ISearchRepoResult';
 export class SearchComponent implements AfterViewInit {
 
   public results$: Observable<ISearchRepoResult>;
-  @ViewChild('searchInput') searchInput: ElementRef;
+  searchInput = new FormControl('');
 
 
   constructor(public searchService: GitSearchService) {}
@@ -25,12 +24,12 @@ export class SearchComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    fromEvent(this.searchInput.nativeElement, 'keyup')
+    this.searchInput.valueChanges
       .pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        tap(() => {
-          this.results$ = this.searchService.search(this.searchInput.nativeElement.value);
+        tap((value) => {
+          this.results$ = this.searchService.search(value);
         })
       )
       .subscribe();

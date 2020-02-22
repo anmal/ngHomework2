@@ -15,6 +15,10 @@
   margin: 100px auto 0 auto;
 }
 
+.spinner  {
+  width: 480px;
+}
+
 .error {
   margin-top: 20px;
   color: red!important;
